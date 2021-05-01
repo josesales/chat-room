@@ -2,8 +2,8 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const Filter = require('bad-words');
-const { generateMessage, generateLocationMessage } = require('./service/message');
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./service/user');
+const { generateMessage, generateLocationMessage } = require('./services/message');
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./services/user');
 
 const app = express();
 const port = process.env.PORT || 5000;
