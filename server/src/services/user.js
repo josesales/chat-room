@@ -1,12 +1,12 @@
 const users = [];
 
-exports.addUser = ({ id, username, room }) => {
+exports.addUser = ({ id, name, room }) => {
     //Clean the data
-    username = username.trim().toLowerCase();
+    name = name.trim().toLowerCase();
     room = room.trim().toLowerCase();
 
     //Validate Data
-    if (!username || !room) {
+    if (!name || !room) {
         return {
             error: 'User Name and Room are required!'
         }
@@ -14,7 +14,7 @@ exports.addUser = ({ id, username, room }) => {
 
     //Check for existing users
     const existingUser = users.find(user => {
-        return user.username == username && user.room == room
+        return user.userName == name && user.room == room
     });
 
     //Validate username
@@ -25,7 +25,7 @@ exports.addUser = ({ id, username, room }) => {
     }
 
     //Store user
-    const user = { id, username, room };
+    const user = { id, name, room };
     users.push(user);
 
     return { user };

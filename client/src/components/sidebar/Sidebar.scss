@@ -1,0 +1,53 @@
+.sidebar {
+    height: 100vh;
+    color: white;
+    background: #2d2d2d;
+    border-right: 1px solid grey;
+    width: 20%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+    @media only screen and (max-width: 45em) {
+        width: 100%;
+        height: 30vh;
+        border-right: none;
+        border-bottom: 1px solid grey;
+        overflow-x: auto;
+    }
+    
+    .room-name {
+        font-weight: 400;
+        font-size: 3rem;
+        background-image: linear-gradient(to top, black, grey);
+        padding: 2rem; 
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .user-name {
+        font-weight: 500;
+        font-size: 3rem;
+        margin-bottom: 4px;
+        padding: 1.2rem 2.4rem 0 2.4rem;
+    }
+    
+    .user-list {
+        list-style-type: none;
+        font-size: 2.5rem;
+        font-weight: 300;
+        padding: 1.2rem 2.4rem 0 2.4rem;
+        text-transform: capitalize;
+        
+        @media only screen and (max-width: 45em) {
+            display: flex;
+            
+            li {
+                &:not(:last-child) {
+                    margin-right: 5rem;
+                }
+            }
+        }
+    }
+}

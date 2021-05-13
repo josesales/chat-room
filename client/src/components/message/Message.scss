@@ -1,0 +1,24 @@
+.message-container {
+    flex-grow: 1;
+    padding: 1.2rem 2.4rem 0 2.4rem;
+    overflow-y: scroll;
+    color: white;
+
+    .message {
+        font-size: 3rem;
+        margin-bottom: 1.6rem; 
+        
+        &__user {
+            display: flex;
+            font-weight: 600;
+
+            &--name {
+                margin-right: 10rem;
+            }
+        }
+
+        &__text {
+            margin-top: 1.6rem;
+        }
+    }
+}

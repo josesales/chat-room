@@ -13,7 +13,7 @@ const io = socketio(server);
 //build in event that runs when a client gets a new connection
 io.on('connection', (socket) => {
 
-    socket.on('join', (userProps, callback) => {
+    socket.on('addUser', (userProps, callback) => {
         const { user, error } = addUser({ id: socket.id, ...userProps });
 
         if (error) {
@@ -24,14 +24,14 @@ io.on('connection', (socket) => {
         socket.join(user.room);
 
         //socket.emit: emit the event to the single referred connected client
-        socket.emit('message', generateMessage('Welcome!', 'Admin'));
+        socket.emit('setMessage', generateMessage('Welcome!', 'Admin'));
 
-        ///socket.broadcast.emit: emit the event to all the clients who are connected except for this particular socket/client
-        socket.broadcast.to(user.room).emit('message', generateMessage(`${user.username} just joined!`, 'Admin'));
+        //socket.broadcast.emit: emit the event to all the clients who are connected except for this particular socket/client
+        socket.broadcast.to(user.room).emit('setMessage', generateMessage(`${user.userName} just joined!`, 'Admin'));
 
         //emit users in the room event
-        io.to(user.room).emit('roomData', {
-            room: user.room,
+        io.to(user.room).emit('setRoom', {
+            name: user.room,
             users: getUsersInRoom(user.room)
         });
 
@@ -48,18 +48,18 @@ io.on('connection', (socket) => {
         const user = getUser(socket.id);
 
         //io.emit: emit the event to all the sockets/clients who are connected
-        io.to(user.room).emit('message', generateMessage(message, user.username));
+        io.to(user.room).emit('message', generateMessage(message, user.userName));
 
         callback();
     });
 
-    //build in event that runs when a particular socket/client gets a new connected
+    //build in event that runs when a particular socket/client gets disconnected
     socket.on('disconnect', () => {
         const user = removeUser(socket.id);
 
         if (user) {
             // we don't need to use socket.broadcast once the socket/client who already got disconnected wont receive the message anyway
-            io.to(user.room).emit('message', generateMessage(`${user.username} just left!`, 'Admin'));
+            io.to(user.room).emit('message', generateMessage(`${user.userName} just left!`, 'Admin'));
 
             //emit users in the room event
             io.to(user.room).emit('roomData', {
@@ -67,15 +67,6 @@ io.on('connection', (socket) => {
                 users: getUsersInRoom(user.room)
             });
         }
-    });
-
-    socket.on('sendLocation', ({ latitude, longitude }, callback) => {
-        const user = getUser(socket.id);
-
-        io.to(user.room).emit('locationMessage',
-            generateLocationMessage(`https://google.com/maps?q=${latitude},${longitude}`, user.username));
-
-        callback();
     });
 });
 
