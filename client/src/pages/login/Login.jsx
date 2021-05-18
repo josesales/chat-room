@@ -30,14 +30,18 @@ const Login = () => {
     }
 
     useEffect(() => {
-        //user should be null during the first time the component renders
-        context.addUser(null);
-    }, [context]);
+
+        if (user) {
+
+            //user should be clean during the first time the login page renders
+            context.removeUserFromRoom(user);
+        }
+    }, []);
 
     return (
         <React.Fragment>
             {
-                user ? <Redirect to="/home" /> :
+                user ? <Redirect to="/" /> :
 
                     <div className="login-container">
                         <form onSubmit={onSubmitHandler}>

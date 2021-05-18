@@ -1,15 +1,7 @@
-exports.generateMessage = (text, userName) => {
+exports.generateMessage = (text, user) => {
     return {
         text,
-        createdAt: new Date().getTime(),
-        userName
-    }
-}
-
-exports.generateLocationMessage = (url, userName) => {
-    return {
-        url,
-        createdAt: new Date().getTime(),
-        userName
+        user,
+        createdAt: new Date(),
     }
 }

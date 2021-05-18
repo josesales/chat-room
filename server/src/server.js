@@ -1,9 +1,8 @@
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const Filter = require('bad-words');
-const { generateMessage, generateLocationMessage } = require('./services/message');
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./services/user');
+const { generateMessage } = require('./services/message');
+const { addUser, removeUserFromRoom, getUsersInRoom } = require('./services/user');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -13,6 +12,10 @@ const io = socketio(server);
 //build in event that runs when a client gets a new connection
 io.on('connection', (socket) => {
 
+    const room = socket.handshake.query.room;
+
+    socket.join(room);
+
     socket.on('addUser', (userProps, callback) => {
         const { user, error } = addUser({ id: socket.id, ...userProps });
 
@@ -20,14 +23,11 @@ io.on('connection', (socket) => {
             return callback(error);
         }
 
-        //Bind the user to a particular room
-        socket.join(user.room);
+        const userNameCap = user.name.charAt(0).toUpperCase() + user.name.slice(1);
 
-        //socket.emit: emit the event to the single referred connected client
-        socket.emit('setMessage', generateMessage('Welcome!', 'Admin'));
-
-        //socket.broadcast.emit: emit the event to all the clients who are connected except for this particular socket/client
-        socket.broadcast.to(user.room).emit('setMessage', generateMessage(`${user.userName} just joined!`, 'Admin'));
+        //socket.broadcast.emit: emit the event to all the clients who are connected except for this particular socket
+        socket.broadcast.to(user.room).emit('addMessage',
+            generateMessage(`${userNameCap} has joined!`, { name: null, room: user.room }));
 
         //emit users in the room event
         io.to(user.room).emit('setRoom', {
@@ -38,35 +38,31 @@ io.on('connection', (socket) => {
         callback();
     });
 
-    socket.on('sendMessage', (message, callback) => {
+    socket.on('addMessage', (messageFields, callback) => {
 
-        const filter = new Filter();
-        if (filter.isProfane(message)) {
-            return callback(generateMessage('Profanity is not allowed!'));
-        }
-
-        const user = getUser(socket.id);
-
-        //io.emit: emit the event to all the sockets/clients who are connected
-        io.to(user.room).emit('message', generateMessage(message, user.userName));
+        //emit the event to all the sockets/clients who are connected
+        io.to(messageFields.user.room).emit('addMessage', messageFields);
 
         callback();
     });
 
-    //build in event that runs when a particular socket/client gets disconnected
-    socket.on('disconnect', () => {
-        const user = removeUser(socket.id);
+    socket.on('removeUserFromRoom', (user, callback) => {
 
-        if (user) {
-            // we don't need to use socket.broadcast once the socket/client who already got disconnected wont receive the message anyway
-            io.to(user.room).emit('message', generateMessage(`${user.userName} just left!`, 'Admin'));
+        const users = removeUserFromRoom(user);
 
-            //emit users in the room event
-            io.to(user.room).emit('roomData', {
-                room: user.room,
-                users: getUsersInRoom(user.room)
-            });
-        }
+        //emit the setRoom with the remaining users in the room
+        io.to(user.room).emit('setRoom', {
+            name: user.room,
+            users: getUsersInRoom(user.room)
+        });
+
+        const userNameCap = user.name.charAt(0).toUpperCase() + user.name.slice(1);
+
+        socket.broadcast.to(user.room).emit('addMessage',
+            generateMessage(`${userNameCap} has left!`, { name: null, room: user.room }));
+
+
+        callback();
     });
 });
 

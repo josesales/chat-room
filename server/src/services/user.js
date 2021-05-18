@@ -1,54 +1,56 @@
-const users = [];
+let users = [];
 
 exports.addUser = ({ id, name, room }) => {
-    //Clean the data
-    name = name.trim().toLowerCase();
-    room = room.trim().toLowerCase();
 
-    //Validate Data
-    if (!name || !room) {
-        return {
-            error: 'User Name and Room are required!'
+    try {
+
+        name = name.trim().toLowerCase();
+        room = room.trim().toLowerCase();
+
+        if (!name || !room) {
+            throw new Error('User Name and Room are required!');
         }
-    }
 
-    //Check for existing users
-    const existingUser = users.find(user => {
-        return user.userName == name && user.room == room
-    });
+        //Check for existing users
+        const existingUser = users.find(user => {
+            return user.name == name && user.room == room
+        });
 
-    //Validate username
-    if (existingUser) {
-        return {
-            error: 'User Name is already in use!'
+        if (existingUser) {
+            throw new Error('This Name is already being used in this room!');
         }
-    }
 
-    //Store user
-    const user = { id, name, room };
-    users.push(user);
+        const user = { id, name, room };
+        users.push(user);
 
-    return { user };
-}
+        return { user };
+    } catch (e) {
 
-exports.removeUser = id => {
-    const index = users.findIndex(user => user.id === id);
-
-    if (index !== -1) {
-        return users.splice(index, 1)[0];
+        return {
+            error: e.message
+        }
     }
 }
 
-exports.getUser = id => {
-    const user = users.find(user => user.id === id);
+//Remove user from the room
+exports.removeUserFromRoom = userData => {
 
-    if (!user) {
+    try {
+
+        users = users.filter(user => {
+            const { name, room } = userData;
+
+            return user.room.toLowerCase() != room.trim().toLowerCase() ||
+                (user.room.toLowerCase() == room.trim().toLowerCase() && user.name.toLowerCase() != name.trim().toLowerCase());
+        });
+
+    } catch (e) {
+
         return {
-            error: 'User not found!'
+            error: e.message
         }
     }
 
-    return user;
 }
 
 exports.getUsersInRoom = room => {

@@ -10,7 +10,7 @@ const messageReducer = (state = INITIAL_STATE, action) => {
         case MessageActionTypes.ADD_MESSAGE:
             return {
                 ...state,
-                message: state.messages.concat(action.payload),
+                messages: [].concat(state.messages).concat(action.payload),
             };
 
         default:

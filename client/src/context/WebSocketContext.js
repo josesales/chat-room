@@ -1,60 +1,118 @@
 import io from 'socket.io-client';
-import React, { createContext } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { createContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { addUser as addUserAction } from '../redux/user/user-actions';
-import { addMessage } from '../redux/message/message-actions';
+import { addMessage as addMessageAction } from '../redux/message/message-actions';
 import { setRoom } from '../redux/room/room-actions';
+import { useLocation } from 'react-router';
 
-let socket = io.connect('http://localhost:5000', {
-    transports: ['websocket', 'polling'],
-    secure: true,
-    reconnection: true,
-    rejectUnauthorized: false
-});
-
-socket.on("connect_error", (err) => {
-    console.log(`connect_error due to ${err.message}`);
-});
-
+let socket = null;
 
 export const WebSocketContext = createContext(null);
 
 export const WebSocketProvider = ({ children }) => {
 
     const dispatch = useDispatch();
+    const location = useLocation();
 
-    const addUser = async (props) => {
+    const user = useSelector(state => state.userReducer.user);
+
+    useEffect(() => {
+
+        if (user) {
+
+            const { name, room } = user;
+
+            socket = io.connect('http://localhost:5000', {
+                query: { room },
+                transports: ['websocket', 'polling'],
+                secure: true,
+                reconnection: true,
+                rejectUnauthorized: false,
+            });
+
+            socket.on("connect_error", (err) => {
+                console.log(`connect_error due to ${err.message}`);
+            });
+
+            //doing the imit here instead in the addUser because user needs to be added to the room again in the server 
+            //in case the browser is refreshed
+            socket.emit('addUser', { name, room }, error => {
+
+                if (error) {
+
+                    if (location.pathname === '/login') {
+                        dispatch(addUserAction(null));
+                        alert(error);
+                    }
+                    return;
+                }
+            });
+
+            //Messages shared by users in the room
+            socket.on('addMessage', messageData => {
+                dispatch(addMessageAction(messageData));
+            });
+
+            //Notify when users join and leave the room
+            socket.on('setRoom', room => {
+                dispatch(setRoom(room));
+            });
+        }
+    }, [user]);
+
+
+    const addUser = props => {
 
         if (props) {
 
             const { name, room } = props;
-            socket.emit('addUser', { name, room }, error => {
+
+            dispatch(addUserAction({ name, room }));
+
+        } else {
+
+            dispatch(addUserAction(null));
+        }
+    }
+
+    const removeUserFromRoom = user => {
+
+        if (user && user.name) {
+
+            socket.emit('removeUserFromRoom', user, error => {
+
+                if (error) {
+                    console.log(error);
+                    return;
+                }
+
+                socket.disconnect();
+
+                addUser(null);
+            });
+        }
+    }
+
+    const addMessage = messageFields => {
+
+        if (messageFields && messageFields.text) {
+
+            socket.emit('addMessage', messageFields, error => {
 
                 if (error) {
                     alert(error);
                     return;
                 }
-
-                dispatch(addUserAction({ name, room }));
             });
-        } else {
-
-            dispatch(addUserAction(props));
         }
     }
 
     const context = {
         addUser,
+        removeUserFromRoom,
+        addMessage
     }
-
-    socket.on('setMessage', message => {
-        dispatch(addMessage(message));
-    });
-
-    //Notify when users join and leave the room
-    socket.on('setRoom', room => {
-        dispatch(setRoom(room));
-    });
 
     return (
         <WebSocketContext.Provider value={context}>

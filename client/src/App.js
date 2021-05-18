@@ -11,8 +11,8 @@ const App = () => {
     <div>
       <Switch>
         <Suspense fallback={<Loader />}>
-          <Route exact path='/' component={Login} />
-          <Route path='/home' component={Home} />
+          <Route path='/' component={Home} />
+          <Route exact path='/login' component={Login} />
         </Suspense>
       </Switch>
     </div>

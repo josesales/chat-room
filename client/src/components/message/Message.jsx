@@ -1,29 +1,60 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 import './Message.scss';
 
 const Message = () => {
 
-    let messages = [2, 2]
-    messages = messages.map(message => {
-        return (
-            <div className="message">
-                <div className="message__user">
-                    <p className="message__user--name">Sales</p>
-                    <p className="message__user--date">10/03/2021</p>
-                </div>
-                <p className="message__text">
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-                    Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through
-                    the cites of the word in classical literature, discovered
-                </p>
-            </div>
+    const messages = useSelector(state => state.messageReducer.messages);
+    const user = useSelector(state => state.userReducer.user);
 
-        );
-    });
+    let messagesUi = null;
+
+    const messageDiv = useRef();
+
+    useEffect(() => {
+
+        if (messageDiv.current) {
+            messageDiv.current.scrollIntoView();
+        }
+    }, [messages]);
+
+    if (messages) {
+        messagesUi = messages.map((message, index) => {
+
+            //Display only the messages from the room of the user
+            if (user && message && message.user && message.user.room == user.room) {
+                return (
+                    <div key={index} ref={messageDiv} className="message">
+
+                        <div className="message__user">
+                            {
+                                message.user && message.user.name ?
+
+                                    <React.Fragment>
+                                        <p className="message__user--name">{message.user.name}</p>
+                                        <p className="message__user--date">
+                                            {moment(message.createdAt).format('DD MMM YYYY, h:mm a')}
+                                        </p>
+                                    </React.Fragment>
+                                    : null
+                            }
+                        </div>
+
+                        <p className="message__text">
+                            {message.text}
+                        </p>
+                    </div>
+
+                );
+            }
+            return null;
+        });
+    }
 
     return (
         <div className="message-container">
-            {messages}
+            {messagesUi}
         </div>
     );
 }
