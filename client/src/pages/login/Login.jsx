@@ -4,12 +4,14 @@ import logo from "../../assets/logo-200x200.png";
 import './Login.scss';
 import { WebSocketContext } from '../../context/WebSocketContext';
 import { useSelector } from 'react-redux';
+import Theme from '../../components/theme/Theme';
 
 const Login = () => {
 
     const [userFields, setUserFields] = useState({ name: '', room: '' });
 
     const context = useContext(WebSocketContext);
+
     const user = useSelector(state => state.userReducer.user);
 
     const onUserFieldsChange = event => {
@@ -32,7 +34,6 @@ const Login = () => {
     useEffect(() => {
 
         if (user) {
-
             //user should be clean during the first time the login page renders
             context.removeUserFromRoom(user);
         }
@@ -59,6 +60,8 @@ const Login = () => {
                                 <label>Room</label>
                                 <input type="text" className="login-container__input" placeholder="Room" autoComplete="off"
                                     value={userFields.room} name="room" onChange={onUserFieldsChange} />
+
+                                <Theme />
 
                                 <input type="submit" value="Enter" className="login-container__submit" />
                             </div>
