@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import logo from "../../assets/logo-200x200.png";
-import './Login.scss';
+import logoLight from "../../assets/logo-200x200.png";
+import logoDark from "../../assets/logo-200x200-dark.png";
 import { WebSocketContext } from '../../context/WebSocketContext';
 import { useSelector } from 'react-redux';
 import Theme from '../../components/theme/Theme';
+import { CenterStyles, InputStyles, LoginContainerStyles, LogoStyles, SubmitStyles } from './LoginStyles';
+
 
 const Login = () => {
 
@@ -13,6 +15,7 @@ const Login = () => {
     const context = useContext(WebSocketContext);
 
     const user = useSelector(state => state.userReducer.user);
+    const theme = useSelector(state => state.themeReducer.theme);
 
     const onUserFieldsChange = event => {
         const { value, name } = event.target;
@@ -44,29 +47,31 @@ const Login = () => {
             {
                 user ? <Redirect to="/" /> :
 
-                    <div className="login-container">
-                        <form onSubmit={onSubmitHandler}>
-                            <div className="login-container__center">
+                    <LoginContainerStyles>
 
-                                <img title="Home" src={logo} alt="Food Helper Logo"
-                                    className="login-container__center--logo" />
+                        <form onSubmit={onSubmitHandler}>
+
+                            <CenterStyles>
+
+                                <LogoStyles title="Home" src={theme == 'light' ? logoLight : logoDark}
+                                    alt="Food Helper Logo" className="login-container__center--logo" />
 
                                 <h1>Chat Room</h1>
 
                                 <label>Name</label>
-                                <input type="text" className="login-container__input" placeholder="Name" autoComplete="off"
-                                    value={userFields.name} name="name" onChange={onUserFieldsChange} />
+                                <InputStyles type="text" className="login-container__input" placeholder="Name"
+                                    autoComplete="off" value={userFields.name} name="name" onChange={onUserFieldsChange} />
 
                                 <label>Room</label>
-                                <input type="text" className="login-container__input" placeholder="Room" autoComplete="off"
-                                    value={userFields.room} name="room" onChange={onUserFieldsChange} />
+                                <InputStyles type="text" className="login-container__input" placeholder="Room"
+                                    autoComplete="off" value={userFields.room} name="room" onChange={onUserFieldsChange} />
 
                                 <Theme />
 
-                                <input type="submit" value="Enter" className="login-container__submit" />
-                            </div>
+                                <SubmitStyles type="submit" value="Enter" />
+                            </CenterStyles>
                         </form>
-                    </div>
+                    </LoginContainerStyles>
             }
         </React.Fragment>
     )

@@ -25,6 +25,7 @@ const GlobalStyles = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-image: ${({ theme }) => theme.bodyColorGradient};
+        color: ${({ theme }) => theme.color};
         box-sizing: border-box;
       }`;
 
