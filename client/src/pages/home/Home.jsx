@@ -4,8 +4,7 @@ import { Redirect } from 'react-router';
 import InputMessage from '../../components/input-message/InputMessage';
 import Message from '../../components/message/Message';
 import Sidebar from '../../components/sidebar/Sidebar';
-import './Home.scss';
-
+import { HomeStyles, MainStyles } from './HomeStyles';
 const Home = () => {
 
     const user = useSelector(state => state.userReducer.user);
@@ -15,16 +14,16 @@ const Home = () => {
     }
 
     return (
-        <div className="home">
+        <HomeStyles>
 
             <Sidebar />
 
-            <div className="home__main">
+            <MainStyles>
 
                 <Message />
                 <InputMessage />
-            </div>
-        </div>
+            </MainStyles>
+        </HomeStyles>
     );
 
 }

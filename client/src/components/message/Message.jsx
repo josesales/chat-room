@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import './Message.scss';
+import { MessageContainerStyles, MessageStyles, MessageUserStyles, UserNameStyles, TextStyles } from './MessageStyles';
 
 const Message = () => {
 
@@ -25,26 +25,26 @@ const Message = () => {
             //Display only the messages from the room of the user
             if (user && message && message.user && message.user.room == user.room) {
                 return (
-                    <div key={index} ref={messageDiv} className="message">
+                    <MessageStyles key={index} ref={messageDiv}>
 
-                        <div className="message__user">
+                        <MessageUserStyles>
                             {
                                 message.user && message.user.name ?
 
                                     <React.Fragment>
-                                        <p className="message__user--name">{message.user.name}</p>
-                                        <p className="message__user--date">
+                                        <UserNameStyles>{message.user.name}</UserNameStyles>
+                                        <p>
                                             {moment(message.createdAt).format('DD MMM YYYY, h:mm a')}
                                         </p>
                                     </React.Fragment>
                                     : null
                             }
-                        </div>
+                        </MessageUserStyles>
 
-                        <p className="message__text">
+                        <TextStyles>
                             {message.text}
-                        </p>
-                    </div>
+                        </TextStyles>
+                    </MessageStyles>
 
                 );
             }
@@ -53,9 +53,9 @@ const Message = () => {
     }
 
     return (
-        <div className="message-container">
+        <MessageContainerStyles>
             {messagesUi}
-        </div>
+        </MessageContainerStyles>
     );
 }
 

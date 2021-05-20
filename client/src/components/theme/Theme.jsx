@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTheme } from '../../redux/theme/theme-actions';
-import './Theme.scss';
+import { ThemeContainerStyles, RadioLabelStyles, RadioInputStyles, RadioButtonStyles } from './ThemeStyles';
 
-const Theme = () => {
+const Theme = ({ columnLayout }) => {
 
     const theme = useSelector(state => state.themeReducer.theme);
 
@@ -16,24 +16,24 @@ const Theme = () => {
     }
 
     return (
-        <div className="theme-container">
+        <ThemeContainerStyles columnLayout={columnLayout}>
 
-            <input type="radio" id="light-theme" name="theme" value="light" className="theme-container__radio-input"
+            <RadioInputStyles type="radio" id="light-theme" name="theme" value="light"
                 onChange={onThemeClick} checked={theme == 'light'} />
 
-            <label htmlFor="light-theme" className="theme-container__radio-label">
-                <span className="theme-container__radio-button"></span>
+            <RadioLabelStyles htmlFor="light-theme">
+                <RadioButtonStyles></RadioButtonStyles>
                 Light Mode
-            </label>
+            </RadioLabelStyles>
 
-            <input type="radio" id="dark-theme" name="theme" value="dark" className="theme-container__radio-input"
+            <RadioInputStyles type="radio" id="dark-theme" name="theme" value="dark"
                 onChange={onThemeClick} checked={theme == 'dark'} />
 
-            <label htmlFor="dark-theme" className="theme-container__radio-label">
-                <span className="theme-container__radio-button"></span>
+            <RadioLabelStyles htmlFor="dark-theme">
+                <RadioButtonStyles></RadioButtonStyles>
                 Dark Mode
-            </label>
-        </div>
+            </RadioLabelStyles>
+        </ThemeContainerStyles>
     );
 
 }

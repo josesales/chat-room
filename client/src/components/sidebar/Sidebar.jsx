@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import './Sidebar.scss';
+import Theme from '../theme/Theme';
+import { SidebarStyles, RoomStyles, ButtonStyles, UserNameStyles, UserListStyles } from './SidebarStyles';
 
 const Sidebar = () => {
 
@@ -17,25 +18,25 @@ const Sidebar = () => {
         return null;
     }
 
-
-
     const onLeaveClickHandler = () => {
         history.push('/login');
     }
 
     return (
-        <div className="sidebar">
+        <SidebarStyles>
 
-            <div className="room-container">
-
+            <RoomStyles>
                 <h2>{room.name}</h2>
-                <button onClick={onLeaveClickHandler}>Leave</button>
-            </div>
 
-            <h3 className="user-name">Users</h3>
+                <Theme columnLayout />
 
-            <ul className="user-list">{usersInRoom}</ul>
-        </div>
+                <ButtonStyles onClick={onLeaveClickHandler}>Leave</ButtonStyles>
+            </RoomStyles>
+
+            <UserNameStyles>Users</UserNameStyles>
+
+            <UserListStyles>{usersInRoom}</UserListStyles>
+        </SidebarStyles>
     );
 }
 

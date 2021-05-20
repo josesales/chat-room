@@ -11,7 +11,7 @@ export const LoginContainerStyles = styled.div`
 
 export const CenterStyles = styled.div`
     box-shadow: 0px 0px 2rem 1px #0e0f11;
-    background-image: ${({ theme }) => theme.loginCenterContainer};
+    background-image: ${({ theme }) => theme.themeBackground};
     padding: 15rem;
     width: 65rem;
     display: flex;
