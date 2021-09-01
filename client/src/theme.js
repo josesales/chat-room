@@ -24,11 +24,12 @@ export const dark = {
         centerBoxBackground: 'linear-gradient(to top, #020202, #020202)',
     },
 
+    themeBackground: 'linear-gradient(to top, #282828, #606060)',
     background: '#2d2d2d',
     color: '#239411',
     colorHover: '#FFFFFF',
     textColor: '#FAFAFA',
-    buttonColor: '#222222',
+    buttonColor: '#383838',
     buttonColorHover: '#239411',
     gradient: 'linear-gradient(#39598A, #79D7ED)',
     radioButtonColor: '#239411',

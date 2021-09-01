@@ -6,7 +6,7 @@ export const InputMessageStyles = styled.div`
     padding: 2.5rem;
     background-image: ${({ theme }) => theme.themeBackground};
 
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:37.5em) {
         justify-content: center;
         margin: 0 0;
         border-radius: 0;
@@ -20,13 +20,13 @@ export const FormStyles = styled.form`
     flex-grow: 1;
     margin-right: 2rem;
 
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:37.5em) {
         align-items: center;
         flex-direction: column;
     }
 `;
 
-export const InputStyles = styled.input`
+export const TextAreaStyles = styled.textarea`
     color: #eeeeee;
     font-size: 2.5rem;
     width: 100%;
@@ -38,7 +38,7 @@ export const InputStyles = styled.input`
     color: ${({ theme }) => theme.textColor};
     background: ${({ theme }) => theme.background};
     
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:37.5em) {
         margin: 0;
     }
 `;
@@ -60,8 +60,9 @@ export const ButtonStyles = styled.button`
         color: ${({ theme }) => theme.colorHover};
     }
     
-    @media only screen and (max-width: 45em) {
-        height: 5rem;
-        margin-top: 2rem;
+    @media only screen and (max-width:37.5em) {
+        height: 6rem;
+        width: 11rem;
+        margin: 1rem 0;
     }
 `;

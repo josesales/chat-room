@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import { MessageContainerStyles, MessageStyles, MessageUserStyles, UserNameStyles, TextStyles } from './MessageStyles';
+import { MessageContainerStyles, MessageStyles, MessageUserStyles, MessageAdminStyles, UserNameStyles, TextStyles, DateStyles, DateAdminStyles } from './MessageStyles';
 
 const Message = () => {
 
@@ -24,6 +24,7 @@ const Message = () => {
 
             //Display only the messages from the room of the user
             if (user && message && message.user && message.user.room == user.room) {
+                
                 return (
                     <MessageStyles key={index} ref={messageDiv}>
 
@@ -33,17 +34,33 @@ const Message = () => {
 
                                     <React.Fragment>
                                         <UserNameStyles>{message.user.name}</UserNameStyles>
-                                        <p>
+                                        <DateStyles>
                                             {moment(message.createdAt).format('DD MMM YYYY, h:mm a')}
-                                        </p>
+                                        </DateStyles>
                                     </React.Fragment>
                                     : null
                             }
                         </MessageUserStyles>
 
-                        <TextStyles>
-                            {message.text}
-                        </TextStyles>
+                        {
+                            !message.user || !message.user.name ?
+
+                                <MessageUserStyles>
+
+                                    <TextStyles>
+                                        {message.text}
+                                    </TextStyles>
+
+                                    <DateStyles>
+                                        {moment(message.createdAt).format('DD MMM YYYY, h:mm a')}
+                                    </DateStyles> 
+                                </MessageUserStyles> :
+
+                                    <TextStyles>
+                                        {message.text.split('/n').map(text => <p>{text}</p>)}
+                                    </TextStyles>
+                            
+                        }
                     </MessageStyles>
 
                 );

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import Theme from '../theme/Theme';
-import { SidebarStyles, RoomStyles, ButtonStyles, UserNameStyles, UserListStyles } from './SidebarStyles';
+import { SidebarStyles, RoomStyles, ButtonStyles, UserContainerStyles, UserNameStyles, UserListStyles } from './SidebarStyles';
 
 const Sidebar = () => {
 
@@ -13,7 +13,7 @@ const Sidebar = () => {
     const history = useHistory();
 
     if (room) {
-        usersInRoom = room.users.map((user, index) => <li key={index}>{user.name}</li>);
+        usersInRoom = room.users.map((user, index) => <li key={index}>{`${user.name}`}</li>);
     } else {
         return null;
     }
@@ -28,14 +28,17 @@ const Sidebar = () => {
             <RoomStyles>
                 <h2>{room.name}</h2>
 
-                <Theme columnLayout />
+                <Theme sidebar/>
 
                 <ButtonStyles onClick={onLeaveClickHandler}>Leave</ButtonStyles>
             </RoomStyles>
 
-            <UserNameStyles>Users</UserNameStyles>
+            <UserContainerStyles>
 
-            <UserListStyles>{usersInRoom}</UserListStyles>
+                <UserNameStyles>Users</UserNameStyles>
+
+                <UserListStyles>{usersInRoom}</UserListStyles>
+            </UserContainerStyles>
         </SidebarStyles>
     );
 }

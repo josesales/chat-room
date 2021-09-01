@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const HomeStyles = styled.div`
     display: flex;
+    height: 100vh;
 
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:37.5em) {
         flex-direction: column;
     }
 `;
@@ -12,11 +13,10 @@ export const MainStyles = styled.div`
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    max-height: 100vh;
     width: 80%;
     background: ${({ theme }) => theme.background};
 
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:37.5em) {
         max-height: 70vh;
         width: 100%;
     }

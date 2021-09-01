@@ -9,7 +9,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
 
         case UserActionTypes.ADD_USER:
             return {
-                ...state,
                 user: action.payload,
             };
 

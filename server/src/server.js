@@ -23,11 +23,9 @@ io.on('connection', (socket) => {
             return callback(error);
         }
 
-        const userNameCap = user.name.charAt(0).toUpperCase() + user.name.slice(1);
-
         //socket.broadcast.emit: emit the event to all the clients who are connected except for this particular socket
         socket.broadcast.to(user.room).emit('addMessage',
-            generateMessage(`${userNameCap} has joined!`, { name: null, room: user.room }));
+            generateMessage(`${user.name} has joined!`, { name: null, room: user.room, createdAt: new Date() }));
 
         //emit users in the room event
         io.to(user.room).emit('setRoom', {

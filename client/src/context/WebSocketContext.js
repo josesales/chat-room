@@ -25,10 +25,10 @@ export const WebSocketProvider = ({ children }) => {
 
             socket = io.connect('http://localhost:5000', {
                 query: { room },
-                transports: ['websocket', 'polling'],
+                transports: ['websocket'],
                 secure: true,
-                reconnection: true,
-                rejectUnauthorized: false,
+                // reconnection: true,
+                // rejectUnauthorized: false,
             });
 
             socket.on("connect_error", (err) => {
@@ -42,6 +42,7 @@ export const WebSocketProvider = ({ children }) => {
                 if (error) {
 
                     if (location.pathname === '/login') {
+                        socket.disconnect(true);
                         dispatch(addUserAction(null));
                         alert(error);
                     }

@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { WebSocketContext } from '../../context/WebSocketContext';
-import { InputMessageStyles, FormStyles, InputStyles, ButtonStyles } from './InputMessageStyles';
+import { InputMessageStyles, FormStyles, TextAreaStyles, ButtonStyles } from './InputMessageStyles';
 
 const InputMessage = () => {
 
@@ -49,7 +49,7 @@ const InputMessage = () => {
             <InputMessageStyles>
                 <FormStyles onSubmit={onSubmitHandler}>
 
-                    <InputStyles ref={textInput} type="text" name="message" value={messageFields.text}
+                    <TextAreaStyles ref={textInput} type="text" name="message" value={messageFields.text}
                         placeholder="Your Message" onChange={onMessageChange} required autoComplete="off" />
 
                     <ButtonStyles onClick={onSubmitHandler}>Send</ButtonStyles>

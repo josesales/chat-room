@@ -19,7 +19,7 @@ export const CenterStyles = styled.div`
     justify-content: center;
     align-items: center;
 
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:28.5em) {
         font-size: 2rem;
         padding: 8rem;
         width: 50rem;
@@ -28,15 +28,16 @@ export const CenterStyles = styled.div`
 
 export const LogoStyles = styled.img`
     width: 50%;
+    margin-bottom: 1rem;
 
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:28.5em) {
         width: 40%;
     }
 `;
 
 export const InputStyles = styled.input`
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
     width: 80%;
     height: 4.5rem;
     font-size: 2.5rem;

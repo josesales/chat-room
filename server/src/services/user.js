@@ -13,7 +13,7 @@ exports.addUser = ({ id, name, room }) => {
 
         //Check for existing users
         const existingUser = users.find(user => {
-            return user.name == name && user.room == room
+            return user.name === name && user.room === room
         });
 
         if (existingUser) {
@@ -40,8 +40,8 @@ exports.removeUserFromRoom = userData => {
         users = users.filter(user => {
             const { name, room } = userData;
 
-            return user.room.toLowerCase() != room.trim().toLowerCase() ||
-                (user.room.toLowerCase() == room.trim().toLowerCase() && user.name.toLowerCase() != name.trim().toLowerCase());
+            return user.room.toLowerCase() !== room.trim().toLowerCase() ||
+                (user.room.toLowerCase() === room.trim().toLowerCase() && user.name.toLowerCase() !== name.trim().toLowerCase());
         });
 
     } catch (e) {
@@ -54,5 +54,5 @@ exports.removeUserFromRoom = userData => {
 }
 
 exports.getUsersInRoom = room => {
-    return users.filter(user => user.room === room);
+    return users.filter(user => user.room.toLowerCase() === room.toLowerCase());
 }

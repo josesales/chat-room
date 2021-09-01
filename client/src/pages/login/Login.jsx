@@ -54,17 +54,13 @@ const Login = () => {
                             <CenterStyles>
 
                                 <LogoStyles title="Home" src={theme == 'light' ? logoLight : logoDark}
-                                    alt="Food Helper Logo" className="login-container__center--logo" />
+                                    alt="Chat App Logo"  />
 
                                 <h1>Chat Room</h1>
 
-                                <label>Name</label>
-                                <InputStyles type="text" className="login-container__input" placeholder="Name"
-                                    autoComplete="off" value={userFields.name} name="name" onChange={onUserFieldsChange} />
+                                <InputStyles type="text" placeholder="Name" autoComplete="off" value={userFields.name} name="name" onChange={onUserFieldsChange} />
 
-                                <label>Room</label>
-                                <InputStyles type="text" className="login-container__input" placeholder="Room"
-                                    autoComplete="off" value={userFields.room} name="room" onChange={onUserFieldsChange} />
+                                <InputStyles type="text" placeholder="Room" autoComplete="off" value={userFields.room} name="room" onChange={onUserFieldsChange} />
 
                                 <Theme />
 

@@ -5,8 +5,7 @@ export const MessageContainerStyles = styled.div`
     padding: 1.2rem 2.4rem 0 2.4rem;
     overflow-y: scroll;
     color: ${({ theme }) => theme.textColor};
-    height: 50vh;
-
+    /* max-height: 80%; */
     /* width */
     &::-webkit-scrollbar {
         width: 1.5rem;
@@ -27,7 +26,10 @@ export const MessageContainerStyles = styled.div`
 
 export const MessageStyles = styled.div`
     font-size: 3rem;
-    margin-bottom: 1.6rem; 
+    margin-bottom: 3rem;
+    background-image: ${({ theme }) => theme.themeBackground};
+    padding: 2rem 3rem;
+    border-radius: 10rem;
 
     @media only screen and (max-width: 45em) {
         font-size: 2.5rem;
@@ -36,11 +38,17 @@ export const MessageStyles = styled.div`
 
 export const MessageUserStyles = styled.div`
     display: flex;
+    justify-content: space-between;
+    width: 100%;
     font-weight: 600;
 `;
 
 export const UserNameStyles = styled.p`
     margin-right: 10rem;
+`;
+
+export const DateStyles = styled.p`
+    margin-left: auto;
 `;
 
 export const TextStyles = styled.p`

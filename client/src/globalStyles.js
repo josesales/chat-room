@@ -10,11 +10,24 @@ const GlobalStyles = createGlobalStyle`
     } 
 
     html {
-        font-size: 62.5%; //1rem = 10 pixels // 10px/16px = 62.5%
-        //Now instead of change pixel by pixel we can just change the font-size and the size of the elements will change accordingly
-        @media only screen and (max-width: 45em) {
-          font-size: 50%; //1rem = 12 pixels // 12px/16px = 75%
-        }
+      font-size: 62.5%; //1rem = 10 pixels // 10px/16px = 62.5%
+
+      //Now instead of change pixel by pixel we can just change the font-size and the size of the elements will change accordingly
+      @media only screen and (min-width:112.5em) { //Big Desktop - 1800px
+        /* font-size: 75%; //1rem = 12 pixels // 12px/16px = 75% */
+      }
+      @media only screen and (max-width:75em) { //Tab Land - 1200px
+        font-size: 56.25%; //1rem = 9 pixels // 9px/16px = 56.25%
+      }
+      @media only screen and (max-width:56.25em) { //Tab Port - 900px
+        font-size: 50%; //1rem = 8 pixels // 8px/16px = 50%
+      }
+      @media only screen and (max-width:37.5em) { //Phone - 600px
+        font-size: 40%; //1rem = 8 pixels // 8px/16px = 50%
+      }
+      @media only screen and (max-width:28.5em) { //Mini Phone - 300px
+        font-size: 35%; //1rem = 8 pixels // 8px/16px = 50%
+      }
     }
 
     body {

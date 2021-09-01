@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export const ThemeContainerStyles = styled.div`
-    width: ${props => props.columnLayout ? '100%' : '110%'};
+    width: ${props => props.sidebar ? '90%' : '75%'};
     margin: 1rem 0;
     display: flex;
-    flex-direction: ${props => props.columnLayout ? 'column' : 'row'};
-    justify-content: space-around;
+    flex-direction: ${props => props.columnLayout ? 'row' : 'row'};
+    justify-content: space-between;
     align-items: center;
 
-    @media only screen and (max-width: 45em) {
-        width: 100%;
+    @media only screen and (max-width:37.5em) {
+        width: 70%;
     }
 
 `;
@@ -22,6 +22,9 @@ export const RadioLabelStyles = styled.label`
     outline: none;
     cursor: pointer;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const RadioButtonStyles = styled.span`
@@ -29,11 +32,10 @@ export const RadioButtonStyles = styled.span`
     height: 3rem;
     border: .5rem solid ${({ theme }) => theme.radioButtonColor};
     border-radius: 50%;
-    position: absolute;
-    left: -3.2rem;
-    top: 0.5rem;
+    position: relative;
+    margin-right: 1rem;
 
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:37.5em) {
         top: -0.3rem;
     }
 
@@ -56,4 +58,12 @@ export const RadioButtonStyles = styled.span`
         opacity: 1;
       }
 
+`;
+
+export const ImgStyles = styled.img`
+    width: 5rem;
+
+    @media only screen and (max-width:37.5em) {
+        width: 6.5rem;
+    }
 `;

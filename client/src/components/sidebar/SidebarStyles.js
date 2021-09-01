@@ -5,16 +5,33 @@ export const SidebarStyles = styled.div`
     color: ${({ theme }) => theme.textColor};
     background: ${({ theme }) => theme.background};
     border-right: 1px solid grey;
-    width: 20%;
+    width: 40rem;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
 
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:37.5em) {
         width: 100%;
-        height: 42vh;
+        height: 30%;
         border-right: none;
         border-bottom: 1px solid grey;
+    }
+
+     /* width */
+     &::-webkit-scrollbar {
+        width: 1.5rem;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px ${({ theme }) => theme.scrollColor};
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: ${({ theme }) => theme.scrollColor};
+        border-radius: 10px;
     }
 `;
 
@@ -29,7 +46,7 @@ export const RoomStyles = styled.div`
     background-image: ${({ theme }) => theme.themeBackground};
     color: ${({ theme }) => theme.color};
     
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:37.5em) {
         padding: 1rem; 
     }
 `;
@@ -53,6 +70,10 @@ export const ButtonStyles = styled.button`
     }
 `;
 
+export const UserContainerStyles = styled.div`
+    height: 100%;
+`;
+
 export const UserNameStyles = styled.h3`
     font-weight: 500;
     font-size: 3rem;
@@ -65,32 +86,11 @@ export const UserListStyles = styled.ul`
     font-size: 2.5rem;
     font-weight: 300;
     padding: 1.2rem 2.4rem 0 2.4rem;
-    text-transform: capitalize;
     overflow-x: auto;
 
-    li {
-        margin-bottom: 3rem;
-    }
-
-    /* width */
-    &::-webkit-scrollbar {
-        width: 1.5rem;
-    }
-
-    /* Track */
-    &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px ${({ theme }) => theme.scrollColor};
-        border-radius: 10px;
-    }
-
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-        background: ${({ theme }) => theme.scrollColor};
-        border-radius: 10px;
-    }
-
-    @media only screen and (max-width: 45em) {
+    @media only screen and (max-width:37.5em) {
         display: flex;
+        flex-wrap: wrap;
         padding: 0 2.4rem;
 
         li {
@@ -100,4 +100,9 @@ export const UserListStyles = styled.ul`
             }
         }
     }
+
+    li {
+        margin-bottom: 3rem;
+    }
+
 `;
