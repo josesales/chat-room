@@ -72,7 +72,6 @@ export const ButtonStyles = styled.button`
         background: ${({ theme }) => theme.buttonColorHover};
         color: ${({ theme }) => theme.colorHover};
     }
-   
     
     @media only screen and (max-width:45em) {
         height: 6rem;
@@ -83,7 +82,6 @@ export const ButtonStyles = styled.button`
 `;
 
 export const InfoStyles = styled.p`
-
     position: absolute;
     bottom: -.5rem;
     left: 0;

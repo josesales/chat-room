@@ -6,8 +6,14 @@ const { addUser, removeUserFromRoom, getUsersInRoom } = require('./services/user
 
 const app = express();
 const port = process.env.PORT || 5000;
-const server = http.createServer(app);
 const io = socketio(server);
+
+if (process.env.NODE_ENV == 'production') {
+    app.use(express.static(path.join(__dirname, 'client/build')))
+    app.get('/*', function (req, res) {
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+      });
+}
 
 //build in event that runs when a client gets a new connection
 io.on('connection', (socket) => {
@@ -64,6 +70,7 @@ io.on('connection', (socket) => {
     });
 });
 
+const server = http.createServer(app);
 server.listen(port, () => {
     console.log(`Server is up on port ${port}`);
 });
