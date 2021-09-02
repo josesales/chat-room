@@ -30,6 +30,7 @@ const Login = () => {
             alert('User Name and Room are required!');
             return;
         }
+        userFields.room = userFields.room.trim().toLowerCase();
 
         context.addUser(userFields);
     }
@@ -56,11 +57,11 @@ const Login = () => {
                                 <LogoStyles title="Home" src={theme == 'light' ? logoLight : logoDark}
                                     alt="Chat App Logo"  />
 
-                                <h1>Chat Room</h1>
+                                <h1>Easy Chat</h1>
 
-                                <InputStyles type="text" placeholder="Name" autoComplete="off" value={userFields.name} name="name" onChange={onUserFieldsChange} />
+                                <InputStyles maxLength={20} type="text" placeholder="Name" autoComplete="off" value={userFields.name} name="name" onChange={onUserFieldsChange} />
 
-                                <InputStyles type="text" placeholder="Room" autoComplete="off" value={userFields.room} name="room" onChange={onUserFieldsChange} />
+                                <InputStyles maxLength={20} type="text" placeholder="Room" autoComplete="off" value={userFields.room} name="room" onChange={onUserFieldsChange} />
 
                                 <Theme />
 

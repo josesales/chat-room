@@ -4,7 +4,7 @@ export const HomeStyles = styled.div`
     display: flex;
     height: 100vh;
 
-    @media only screen and (max-width:37.5em) {
+    @media only screen and (max-width:45em) {
         flex-direction: column;
     }
 `;
@@ -16,7 +16,7 @@ export const MainStyles = styled.div`
     width: 80%;
     background: ${({ theme }) => theme.background};
 
-    @media only screen and (max-width:37.5em) {
+    @media only screen and (max-width:45em) {
         max-height: 70vh;
         width: 100%;
     }

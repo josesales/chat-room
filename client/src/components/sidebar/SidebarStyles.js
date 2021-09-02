@@ -10,7 +10,7 @@ export const SidebarStyles = styled.div`
     display: flex;
     flex-direction: column;
 
-    @media only screen and (max-width:37.5em) {
+    @media only screen and (max-width:45em) {
         width: 100%;
         height: 30%;
         border-right: none;
@@ -46,21 +46,23 @@ export const RoomStyles = styled.div`
     background-image: ${({ theme }) => theme.themeBackground};
     color: ${({ theme }) => theme.color};
     
-    @media only screen and (max-width:37.5em) {
+    @media only screen and (max-width:45em) {
         padding: 1rem; 
     }
 `;
 
 export const ButtonStyles = styled.button`
+    width: 10rem;
     margin-top: 1rem;
     padding: 1rem;
-    height: 5rem;
-    font-size: 2.5rem;
-    width: 10rem;
-    border-radius: 2rem;
+    font-size: 3rem;
     outline: none;
+    border-radius: 2rem;
     cursor: pointer;
+    border: none;
     box-shadow: 0px 0px 1rem 1px #0e0f11;
+    font-family: 'Alegreya', serif;
+    font-weight: 700;
     background: ${({ theme }) => theme.buttonColor};
     color: ${({ theme }) => theme.color};
 
@@ -88,7 +90,7 @@ export const UserListStyles = styled.ul`
     padding: 1.2rem 2.4rem 0 2.4rem;
     overflow-x: auto;
 
-    @media only screen and (max-width:37.5em) {
+    @media only screen and (max-width:45em) {
         display: flex;
         flex-wrap: wrap;
         padding: 0 2.4rem;

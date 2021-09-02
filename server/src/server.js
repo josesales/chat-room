@@ -12,7 +12,7 @@ const io = socketio(server);
 //build in event that runs when a client gets a new connection
 io.on('connection', (socket) => {
 
-    const room = socket.handshake.query.room;
+    const room = socket.handshake.query.room.trim().toLowerCase();
 
     socket.join(room);
 
@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
 
     socket.on('removeUserFromRoom', (user, callback) => {
 
-        const users = removeUserFromRoom(user);
+        removeUserFromRoom(user);
 
         //emit the setRoom with the remaining users in the room
         io.to(user.room).emit('setRoom', {

@@ -98,7 +98,7 @@ export const WebSocketProvider = ({ children }) => {
     const addMessage = messageFields => {
 
         if (messageFields && messageFields.text) {
-
+            
             socket.emit('addMessage', messageFields, error => {
 
                 if (error) {

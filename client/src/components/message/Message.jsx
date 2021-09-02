@@ -47,9 +47,9 @@ const Message = () => {
 
                                 <MessageUserStyles>
 
-                                    <TextStyles>
+                                    <p>
                                         {message.text}
-                                    </TextStyles>
+                                    </p>
 
                                     <DateStyles>
                                         {moment(message.createdAt).format('DD MMM YYYY, h:mm a')}
@@ -57,7 +57,7 @@ const Message = () => {
                                 </MessageUserStyles> :
 
                                     <TextStyles>
-                                        {message.text.split('/n').map(text => <p>{text}</p>)}
+                                        {message.text.split('/n').map(text => <TextStyles>{text}</TextStyles>)}
                                     </TextStyles>
                             
                         }

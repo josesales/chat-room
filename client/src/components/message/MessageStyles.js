@@ -39,6 +39,7 @@ export const MessageStyles = styled.div`
 export const MessageUserStyles = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     font-weight: 600;
 `;
@@ -52,5 +53,5 @@ export const DateStyles = styled.p`
 `;
 
 export const TextStyles = styled.p`
-    margin-top: 1.6rem;
+    margin-top: 1rem;
 `;

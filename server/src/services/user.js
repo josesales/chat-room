@@ -13,7 +13,7 @@ exports.addUser = ({ id, name, room }) => {
 
         //Check for existing users
         const existingUser = users.find(user => {
-            return user.name === name && user.room === room
+            return user.name.trim().toLowerCase() === name && user.room.trim().toLowerCase() === room
         });
 
         if (existingUser) {

@@ -44,14 +44,17 @@ export const TextAreaStyles = styled.textarea`
 `;
 
 export const ButtonStyles = styled.button`
+    width: 10rem;
+    margin-top: 1rem;
     padding: 1rem;
-    height: 8rem;
-    font-size: 2.5rem;
-    width: 8rem;
-    border-radius: 2rem;
+    font-size: 3rem;
     outline: none;
+    border-radius: 2rem;
     cursor: pointer;
+    border: none;
     box-shadow: 0px 0px 1rem 1px #0e0f11;
+    font-family: 'Alegreya', serif;
+    font-weight: 700;
     background: ${({ theme }) => theme.buttonColor};
     color: ${({ theme }) => theme.color};
 
@@ -59,10 +62,11 @@ export const ButtonStyles = styled.button`
         background: ${({ theme }) => theme.buttonColorHover};
         color: ${({ theme }) => theme.colorHover};
     }
+   
     
     @media only screen and (max-width:37.5em) {
         height: 6rem;
         width: 11rem;
         margin: 1rem 0;
-    }
+    } 
 `;
