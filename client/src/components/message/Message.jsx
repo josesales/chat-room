@@ -24,7 +24,7 @@ const Message = () => {
 
             //Display only the messages from the room of the user
             if (user && message && message.user && message.user.room === user.room) {
-                
+
                 return (
                     <MessageStyles key={index} ref={messageDiv}>
 
@@ -54,8 +54,10 @@ const Message = () => {
                                     </DateStyles> 
                                 </MessageUserStyles> :
 
-                                    <TextStyles>
-                                        {message.text.split('/n').map(text => <TextStyles>{text}</TextStyles>)}
+                                   <TextStyles>
+                                        {
+                                            message.text.split('\n').map(text => <p>{text}</p>
+                                        )}
                                     </TextStyles>
                             
                         }

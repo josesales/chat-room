@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { WebSocketContext } from '../../context/WebSocketContext';
-import { InputMessageStyles, FormStyles, TextAreaStyles, ButtonStyles } from './InputMessageStyles';
+import { InputMessageStyles, FormStyles, TextAreaContainer, TextAreaStyles, ButtonStyles, InfoStyles } from './InputMessageStyles';
 
 const InputMessage = () => {
 
@@ -21,11 +21,23 @@ const InputMessage = () => {
     const onMessageChange = event => {
 
         const { value } = event.target;
-        setMessageFields({ ...messageFields, text: value });
+        if(value.trim()) {
+            setMessageFields({ ...messageFields, text: value });
+        }
+    };
+    
+    const onMessageKeyDown = event => {
+
+        const { keyCode, shiftKey } = event;
+        
+        if(keyCode === 13 && !shiftKey) {
+            //Submit if user press enter and it breaks the line if user press shift + enter
+            onSubmitHandler();
+        }
     };
 
     const onSubmitHandler = e => {
-        e.preventDefault();
+        e?.preventDefault();
 
         if (!messageFields.text || !messageFields.text.trim()) {
 
@@ -37,7 +49,7 @@ const InputMessage = () => {
         }
 
         context.addMessage({ ...messageFields, createdAt: new Date() });
-        setMessageFields(messageFieldsInitialState);
+        setMessageFields({...messageFieldsInitialState});
 
         if (textInput.current) {
             textInput.current.focus();
@@ -47,14 +59,19 @@ const InputMessage = () => {
     return (
         <React.Fragment>
             <InputMessageStyles>
-                <FormStyles onSubmit={onSubmitHandler}>
-
-                    <TextAreaStyles ref={textInput} type="text" name="message" value={messageFields.text}
-                        placeholder="Your Message" onChange={onMessageChange} required autoComplete="off" />
+                <FormStyles>
+                    
+                    <TextAreaContainer>  
+                        
+                        <TextAreaStyles ref={textInput} type="text" name="message" value={messageFields.text}
+                            placeholder="Your Message" onChange={onMessageChange} onKeyDown={onMessageKeyDown} required autoComplete="off" />
+                        <InfoStyles>Press shift + Enter for line break.</InfoStyles>
+                    </TextAreaContainer>  
 
                     <ButtonStyles onClick={onSubmitHandler}>Send</ButtonStyles>
                 </FormStyles>
             </InputMessageStyles>
+
         </React.Fragment>
     );
 }
