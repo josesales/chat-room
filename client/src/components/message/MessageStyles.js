@@ -5,7 +5,7 @@ export const MessageContainerStyles = styled.div`
     padding: 1.2rem 2.4rem 0 2.4rem;
     overflow-y: scroll;
     color: ${({ theme }) => theme.textColor};
-    /* max-height: 80%; */
+
     /* width */
     &::-webkit-scrollbar {
         width: 1.5rem;
@@ -29,7 +29,7 @@ export const MessageStyles = styled.div`
     margin-bottom: 3rem;
     background-image: ${({ theme }) => theme.themeBackground};
     padding: 2rem 3rem;
-    border-radius: 10rem;
+    border-radius: 2rem;
 
     @media only screen and (max-width: 45em) {
         font-size: 2.5rem;

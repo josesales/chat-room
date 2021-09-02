@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import { MessageContainerStyles, MessageStyles, MessageUserStyles, MessageAdminStyles, UserNameStyles, TextStyles, DateStyles, DateAdminStyles } from './MessageStyles';
+import { MessageContainerStyles, MessageStyles, MessageUserStyles, UserNameStyles, TextStyles, DateStyles } from './MessageStyles';
 
 const Message = () => {
 
@@ -23,7 +23,7 @@ const Message = () => {
         messagesUi = messages.map((message, index) => {
 
             //Display only the messages from the room of the user
-            if (user && message && message.user && message.user.room == user.room) {
+            if (user && message && message.user && message.user.room === user.room) {
                 
                 return (
                     <MessageStyles key={index} ref={messageDiv}>
@@ -47,9 +47,7 @@ const Message = () => {
 
                                 <MessageUserStyles>
 
-                                    <p>
-                                        {message.text}
-                                    </p>
+                                    <p>{message.text}</p>
 
                                     <DateStyles>
                                         {moment(message.createdAt).format('DD MMM YYYY, h:mm a')}

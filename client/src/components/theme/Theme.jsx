@@ -21,7 +21,7 @@ const Theme = ({ sidebar }) => {
         <ThemeContainerStyles sidebar={sidebar}>
 
             <RadioInputStyles type="radio" id="light-theme" name="theme" value="light"
-                onChange={onThemeClick} checked={theme == 'light'} />
+                onChange={onThemeClick} checked={theme === 'light'} />
 
             <RadioLabelStyles htmlFor="light-theme">
 
@@ -31,7 +31,7 @@ const Theme = ({ sidebar }) => {
             </RadioLabelStyles>
 
             <RadioInputStyles type="radio" id="dark-theme" name="theme" value="dark"
-                onChange={onThemeClick} checked={theme == 'dark'} />
+                onChange={onThemeClick} checked={theme === 'dark'} />
 
             <RadioLabelStyles htmlFor="dark-theme">
                 <RadioButtonStyles></RadioButtonStyles>

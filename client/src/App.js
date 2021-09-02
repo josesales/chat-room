@@ -1,10 +1,10 @@
-import React, { lazy, Suspense, useState } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Loader from './components/loader/Loader';
 import { light, dark } from './theme';
 import GlobalStyles from './globalStyles';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Home = lazy(() => import('./pages/home/Home'));
 const Login = lazy(() => import('./pages/login/Login'));
@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <div>
-      <ThemeProvider theme={theme == 'light' ? light : dark}>
+      <ThemeProvider theme={theme === 'light' ? light : dark}>
         <GlobalStyles />
         <Switch>
           <Suspense fallback={<Loader />}>

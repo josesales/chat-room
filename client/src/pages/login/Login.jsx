@@ -54,7 +54,7 @@ const Login = () => {
 
                             <CenterStyles>
 
-                                <LogoStyles title="Home" src={theme == 'light' ? logoLight : logoDark}
+                                <LogoStyles title="Home" src={theme === 'light' ? logoLight : logoDark}
                                     alt="Chat App Logo"  />
 
                                 <h1>Easy Chat</h1>
