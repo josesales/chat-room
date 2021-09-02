@@ -83,6 +83,7 @@ export const ButtonStyles = styled.button`
 `;
 
 export const InfoStyles = styled.p`
+
     position: absolute;
     bottom: -.5rem;
     left: 0;
