@@ -7,7 +7,7 @@ import { setRoom } from '../redux/room/room-actions';
 import { useLocation } from 'react-router';
 
 let socket = null;
-const baseUrl = process.env.NODE_ENV == 'development' ?  'http://localhost:5000' : 'https://jose-sales-chat.herokuapp.com';
+const baseUrl = process.env.NODE_ENV == 'development' ?  'http://localhost:5000' : 'https://jose-sales-chat.herokuapp.com:' + process.env.PORT;
 
 export const WebSocketContext = createContext(null);
 
