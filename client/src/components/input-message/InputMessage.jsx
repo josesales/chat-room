@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { WebSocketContext } from '../../context/WebSocketContext';
 import { InputMessageStyles, FormStyles, TextAreaContainer, TextAreaStyles, ButtonStyles, InfoStyles } from './InputMessageStyles';
 
+let shouldLineBreak = false;
 const InputMessage = () => {
 
     const context = useContext(WebSocketContext);
@@ -20,10 +21,15 @@ const InputMessage = () => {
 
     const onMessageChange = event => {
 
-        const { value } = event.target;
-        if(value.trim()) {
-            setMessageFields({ ...messageFields, text: value });
+        let { value } = event.target;
+
+        if(!shouldLineBreak ) {
+            //only call trim if line should not break once line does not break with trim
+            value= value.trim();
         }
+
+        shouldLineBreak = false;
+        setMessageFields({ ...messageFields, text: value });
     };
     
     const onMessageKeyDown = event => {
@@ -33,7 +39,10 @@ const InputMessage = () => {
         if(keyCode === 13 && !shiftKey) {
             //Submit if user press enter and it breaks the line if user press shift + enter
             onSubmitHandler();
+            return;
         }
+
+        shouldLineBreak = true;
     };
 
     const onSubmitHandler = e => {
