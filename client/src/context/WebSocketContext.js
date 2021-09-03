@@ -7,6 +7,7 @@ import { setRoom } from '../redux/room/room-actions';
 import { useLocation } from 'react-router';
 
 let socket = null;
+const baseUrl = process.env.NODE_ENV == 'development' ?  'http://localhost:5000' : 'https://jose-sales-chat.herokuapp.com';
 
 export const WebSocketContext = createContext(null);
 
@@ -23,7 +24,7 @@ export const WebSocketProvider = ({ children }) => {
 
             const { name, room } = user;
 
-            socket = io.connect('http://localhost:5000', {
+            socket = io.connect(baseUrl, {
                 query: { room },
                 transports: ['websocket'],
                 secure: true,
