@@ -38,6 +38,7 @@ export const SidebarStyles = styled.div`
 export const RoomStyles = styled.div`
     font-weight: 400;
     font-size: 3rem;
+    text-transform: capitalize;
     padding: 2rem; 
     display: flex;
     flex-direction: column;
@@ -74,6 +75,7 @@ export const ButtonStyles = styled.button`
 
 export const UserContainerStyles = styled.div`
     height: 100%;
+    text-transform: capitalize;
 `;
 
 export const UserNameStyles = styled.h3`

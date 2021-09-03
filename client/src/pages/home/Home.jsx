@@ -6,6 +6,7 @@ import Loader from '../../components/loader/Loader';
 import Message from '../../components/message/Message';
 import Sidebar from '../../components/sidebar/Sidebar';
 import { HomeStyles, MainStyles } from './HomeStyles';
+
 const Home = () => {
 
     const user = useSelector(state => state.userReducer.user);

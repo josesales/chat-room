@@ -42,6 +42,7 @@ export const MessageUserStyles = styled.div`
     align-items: center;
     width: 100%;
     font-weight: 600;
+    text-transform: capitalize;
 `;
 
 export const UserNameStyles = styled.p`
