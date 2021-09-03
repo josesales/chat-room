@@ -5,6 +5,7 @@ import userReducer from './user/user-reducer';
 import messageReducer from './message/message-reducer';
 import roomReducer from './room/room-reducer';
 import themeReducer from './theme/theme-reducer';
+import displayMessageReducer from './display-message/display-message-reducer';
 
 const persistConfig = {
     key: 'root',
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     messageReducer,
     roomReducer,
     themeReducer,
+    displayMessageReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

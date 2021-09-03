@@ -3,9 +3,11 @@ import { Redirect } from 'react-router-dom';
 import logoLight from "../../assets/logo-200x200.png";
 import logoDark from "../../assets/logo-200x200-dark.png";
 import { WebSocketContext } from '../../context/WebSocketContext';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Theme from '../../components/theme/Theme';
 import { CenterStyles, InputStyles, LoginContainerStyles, LogoStyles, SubmitStyles } from './LoginStyles';
+import { displayMessage } from '../../redux/display-message/display-message-actions';
+import DisplayMessage from '../../components/display-message/DisplayMessage';
 
 
 const Login = () => {
@@ -14,8 +16,10 @@ const Login = () => {
 
     const context = useContext(WebSocketContext);
 
+    const dispatch = useDispatch();
     const user = useSelector(state => state.userReducer.user);
     const theme = useSelector(state => state.themeReducer.theme);
+    const { type, message } = useSelector(state => state.displayMessageReducer);
 
     const onUserFieldsChange = event => {
         const { value, name } = event.target;
@@ -27,9 +31,12 @@ const Login = () => {
         e.preventDefault();
 
         if (!userFields.name || !userFields.room) {
-            alert('User Name and Room are required!');
+        
+            window.scrollTo(0, 0);
+            dispatch(displayMessage({type:'alert', message: 'User Name and Room are required!'}));
             return;
         }
+
         userFields.room = userFields.room.trim().toLowerCase();
 
         context.addUser(userFields);
@@ -48,27 +55,29 @@ const Login = () => {
             {
                 user ? <Redirect to="/" /> :
 
-                    <LoginContainerStyles>
 
-                        <form onSubmit={onSubmitHandler}>
+                <LoginContainerStyles>
+                    <form onSubmit={onSubmitHandler}>
+                        {
+                            type && message ? <DisplayMessage type={type} message={message} /> : null
+                        }
+                        <CenterStyles>
 
-                            <CenterStyles>
+                            <LogoStyles title="Home" src={theme === 'light' ? logoLight : logoDark}
+                                alt="Chat App Logo"  />
 
-                                <LogoStyles title="Home" src={theme === 'light' ? logoLight : logoDark}
-                                    alt="Chat App Logo"  />
+                            <h1>Easy Chat</h1>
 
-                                <h1>Easy Chat</h1>
+                            <InputStyles maxLength={20} type="text" placeholder="Name" autoComplete="off" value={userFields.name} name="name" onChange={onUserFieldsChange} />
 
-                                <InputStyles maxLength={20} type="text" placeholder="Name" autoComplete="off" value={userFields.name} name="name" onChange={onUserFieldsChange} />
+                            <InputStyles maxLength={20} type="text" placeholder="Room" autoComplete="off" value={userFields.room} name="room" onChange={onUserFieldsChange} />
 
-                                <InputStyles maxLength={20} type="text" placeholder="Room" autoComplete="off" value={userFields.room} name="room" onChange={onUserFieldsChange} />
+                            <Theme />
 
-                                <Theme />
-
-                                <SubmitStyles type="submit" value="Enter" />
-                            </CenterStyles>
-                        </form>
-                    </LoginContainerStyles>
+                            <SubmitStyles type="submit" value="Enter" />
+                        </CenterStyles>
+                    </form>
+                </LoginContainerStyles>
             }
         </React.Fragment>
     )
