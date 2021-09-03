@@ -46,6 +46,7 @@ const InputMessage = () => {
     };
 
     const onSubmitHandler = e => {
+        
         e?.preventDefault();
 
         if (!messageFields.text || !messageFields.text.trim()) {
