@@ -27,7 +27,7 @@ export const WebSocketProvider = ({ children }) => {
             console.log(baseUrl);
             socket = io(baseUrl, {
                 query: { room },
-                transports: ['pooling', 'websocket'],
+                transports: ['pooling'],
                 secure: true,
                 // reconnection: true,
                 // rejectUnauthorized: false,
