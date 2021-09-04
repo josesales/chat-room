@@ -8,7 +8,23 @@ import { useLocation } from 'react-router';
 import { displayMessage } from '../redux/display-message/display-message-actions';
 
 let socket = null;
-const baseUrl = process.env.NODE_ENV === 'development' ?  'http://localhost:5000' : 'https://easychat.chat';
+// let baseUrl = process.env.NODE_ENV === 'development' ?  'http://localhost:5000' : 'https://easychat.chat';
+let baseUrl = 'http://localhost:5000';
+
+let socketOptions = {
+    transports: ['websocket', 'polling'],
+    secure: true,
+    // reconnection: true,
+    // rejectUnauthorized: false,
+}
+
+if(process.env.NODE_ENV === 'production') {
+    baseUrl = 'https://easychat.chat';
+    socketOptions = {
+        ...socketOptions,   
+        path: '/backend/socket.io',
+    }
+}
 
 export const WebSocketContext = createContext(null);
 
@@ -26,12 +42,8 @@ export const WebSocketProvider = ({ children }) => {
             const { name, room } = user;
             console.log(baseUrl);
             socket = io(baseUrl, {
+                ...socketOptions,
                 query: { room },
-                transports: ['websocket', 'polling'],
-                secure: true,
-                path: '/backend/socket.io',
-                // reconnection: true,
-                // rejectUnauthorized: false,
             });
 
             socket.on("connect_error", (err) => {
