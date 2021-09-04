@@ -23,10 +23,10 @@ export const WebSocketProvider = ({ children }) => {
         if (user) {
 
             const { name, room } = user;
-
-            socket = io.connect(baseUrl, {
+            console.log(baseUrl);
+            socket = io(baseUrl, {
                 query: { room },
-                transports: ['websocket'],
+                transports: ['pooling', 'websocket'],
                 secure: true,
                 // reconnection: true,
                 // rejectUnauthorized: false,
