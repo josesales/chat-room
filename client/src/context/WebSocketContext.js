@@ -8,7 +8,7 @@ import { useLocation } from 'react-router';
 import { displayMessage } from '../redux/display-message/display-message-actions';
 
 let socket = null;
-const baseUrl = process.env.NODE_ENV === 'development' ?  'http://localhost:5000' : 'https://easychat.chat/backend';
+const baseUrl = process.env.NODE_ENV === 'development' ?  'http://localhost:5000' : 'https://easychat.chat';
 
 export const WebSocketContext = createContext(null);
 
