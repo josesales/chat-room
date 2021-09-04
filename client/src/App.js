@@ -14,7 +14,6 @@ const App = () => {
   const theme = useSelector(state => state.themeReducer.theme);
 
   return (
-    <div>
       <ThemeProvider theme={theme === 'light' ? light : dark}>
         <GlobalStyles />
         <Switch>
@@ -24,7 +23,6 @@ const App = () => {
           </Suspense>
         </Switch>
       </ThemeProvider>
-    </div>
   );
 }
 

@@ -18,21 +18,24 @@ const Home = () => {
 
     return (
         <React.Fragment>
+
             {
                 !room ? <Loader /> :
-
                     <HomeStyles>
 
-                        <Sidebar />
+                        <React.Fragment>
 
-                        <MainStyles>
+                            <Sidebar />
 
-                            <Message />
-                            <InputMessage />
-                        </MainStyles>
+                            <MainStyles>
+
+                                <Message />
+                                <InputMessage />
+                            </MainStyles>
+                        </React.Fragment>
                     </HomeStyles>
             }
-        </React.Fragment>
+            </React.Fragment>
     );
 
 }

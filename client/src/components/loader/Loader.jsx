@@ -1,12 +1,12 @@
 import React from 'react';
-import  './Loader.scss'
+import {LoaderOverlayStyles, LoaderContainerStyles} from './LoaderStyles'
 
 
 const Loader = () => (
 
-    <div className="loader-overlay">
-        <div className="loader-container"></div>
-    </div>
+    <LoaderOverlayStyles>
+        <LoaderContainerStyles />
+    </LoaderOverlayStyles>
 )
 
 export default Loader;

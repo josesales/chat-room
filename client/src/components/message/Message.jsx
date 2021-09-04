@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import { MessageContainerStyles, MessageStyles, MessageUserStyles, UserNameStyles, TextStyles, DateStyles } from './MessageStyles';
+import { MessageContainerStyles, MessageStyles, MessageUserStyles, UserNameStyles, DateStyles } from './MessageStyles';
 
 const Message = () => {
 
@@ -54,11 +54,11 @@ const Message = () => {
                                     </DateStyles> 
                                 </MessageUserStyles> :
 
-                                   <TextStyles>
+                                   <React.Fragment>
                                         {
-                                            message.text.split('\n').map(text => <p>{text}</p>
-                                        )}
-                                    </TextStyles>
+                                            message.text.split('\n').map((text, index) => <p key={index}>{text}</p>)
+                                        }
+                                    </React.Fragment>
                             
                         }
                     </MessageStyles>

@@ -37,7 +37,7 @@ const GlobalStyles = createGlobalStyle`
           sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-image: ${({ theme }) => theme.login.background};
+        background: ${({ theme }) => theme.background};
         color: ${({ theme }) => theme.color};
         box-sizing: border-box;
       }`;

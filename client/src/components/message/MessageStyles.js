@@ -52,7 +52,3 @@ export const UserNameStyles = styled.p`
 export const DateStyles = styled.p`
     margin-left: auto;
 `;
-
-export const TextStyles = styled.p`
-    margin-top: 1rem;
-`;
