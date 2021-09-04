@@ -9,16 +9,14 @@ const { addUser, removeUserFromRoom, getUsersInRoom } = require('./services/user
 const app = express();
 app.use(allowClientRequests);
 
-if (process.env.NODE_ENV == 'production') {
-    app.use(express.static(path.join(__dirname, 'client/build')))
-    // app.get('/*', function (req, res) {
-    //     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-    //   });
-}
-
 const port = process.env.PORT || 5000;
 const server = http.createServer(app);
 const io = socketio(server)
+
+if (process.env.NODE_ENV == 'production') {
+    app.use(express.static(path.join(__dirname, 'client/build')))
+    io.of('/backend');
+}
 
 
 //build in event that runs when a client gets a new connection
