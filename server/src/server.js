@@ -2,10 +2,12 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const path = require('path');
+const allowClientRequests = require('./middleware/allowClientRequests');
 const { generateMessage } = require('./services/message');
 const { addUser, removeUserFromRoom, getUsersInRoom } = require('./services/user');
 
 const app = express();
+app.use(allowClientRequests);
 
 if (process.env.NODE_ENV == 'production') {
     app.use(express.static(path.join(__dirname, 'client/build')))

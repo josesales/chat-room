@@ -5,6 +5,7 @@ import { addUser as addUserAction } from '../redux/user/user-actions';
 import { addMessage as addMessageAction } from '../redux/message/message-actions';
 import { setRoom } from '../redux/room/room-actions';
 import { useLocation } from 'react-router';
+import { displayMessage } from '../redux/display-message/display-message-actions';
 
 let socket = null;
 const baseUrl = process.env.NODE_ENV === 'development' ?  'http://localhost:5000' : 'https://easychat.chat/backend';
@@ -45,7 +46,7 @@ export const WebSocketProvider = ({ children }) => {
                     if (location.pathname === '/login') {
                         socket.disconnect(true);
                         dispatch(addUserAction(null));
-                        alert(error);
+                        dispatch(displayMessage({type:'alert', message: error}));
                     }
                     return;
                 }
