@@ -27,8 +27,9 @@ export const WebSocketProvider = ({ children }) => {
             console.log(baseUrl);
             socket = io(baseUrl, {
                 query: { room },
-                transports: ['polling'],
+                transports: ['websocket', 'polling'],
                 secure: true,
+                path: '/backend/socket.io',
                 // reconnection: true,
                 // rejectUnauthorized: false,
             });
