@@ -3,7 +3,7 @@
   <h1 align="center">Easy Chat</h1>
 
   <p align="center">
-    Chat Application that allows you to chat with people in a room  </p>
+    Chat Application that allows you to chat with multiple people in a room  </p>
 </p>
 
 <h3>Stack</h2>
